@@ -1,19 +1,93 @@
-<div id="header"></div>
 
-Hello
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supabase Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+      <h1>My Website</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<main>
+  <div class="navbar_space"> </div>
+  <h1>Supabase 資料庫示例</h1>
+
+  <h1  id="data">asd</h1>
+
+  <script>
+    // 等待 DOM 完全加載再執行腳本
+    window.addEventListener('load', function() {
+      var titleElement = document.getElementById('data');
+      
+      // 初始化 Supabase
+      const supabaseUrl = 'https://wpwnrttiwblyqcsxsqmq.supabase.co'; 
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indwd25ydHRpd2JseXFjc3hzcW1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIwNTM5NTUsImV4cCI6MjA1NzYyOTk1NX0.Dst7NooWpYBwhENWnD6vPoWn9sIPZ3J3KI3O0nQ24ek'; 
+      const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+      // 修改頁面文字
+      titleElement.textContent = 'no';
+
+      // 示例：從 products 表中獲取數據
+      async function fetchProducts() {
+          const { data, error } = await supabase
+              .from('products')
+              .select('*');
+
+          if (error) {
+              console.error('Error fetching products:', error);
+              titleElement.textContent = 'error';
+          } else {
+
+              console.log('Products:', data);
+              titleElement.textContent = data;
+              // 在這裡處理獲取到的數據，例如顯示在頁面上
+          }
+      }
+
+      // 調用函數以獲取數據
+      fetchProducts();
+    });
+  </script>
+
+  <section id="home">
+    <h2>Welcome to My Website</h2>
+    <p>This is the home section of the webpage.</p>
+  </section>
+  <section id="about">
+    <h2>About Us</h2>
+    <p>This section is about our company.</p>
+  </section>
+  <section id="services">
+    <h2>Our Services</h2>
+    <p>Details about services we offer.</p>
+  </section>
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Feel free to get in touch with us!</p>
+  </section>
+</main>
     
-<div id="footer"></div>
+<footer>
+  <p>&copy; 2025 My Website | All rights reserved.</p>
+</footer>
 
+</body>
+</html>
 
-<script>
-  fetch('header.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('header').innerHTML = data;
-    });
-  fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('footer').innerHTML = data;
-    });
-</script>
